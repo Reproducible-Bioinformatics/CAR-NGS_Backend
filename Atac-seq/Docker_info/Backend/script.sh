@@ -31,32 +31,43 @@ else
     echo "Indice del genoma trovato. Procedo con l'analisi."
 fi
 
-# Step 2: Rileva coppie di file FASTQ paired-end nella cartella /scratch
+# Step 2: Rileva file FASTQ nella cartella /scratch
 FASTQ_FILES=($(ls "$DATA_DIR"/*.fastq.gz))
 PAIR_COUNT=${#FASTQ_FILES[@]}
 
-if [ $((PAIR_COUNT % 2)) -ne 0 ]; then
-    echo "Errore: Il numero di file FASTQ non è pari."
+if [ $PAIR_COUNT -eq 0 ]; then
+    echo "Errore: Nessun file FASTQ trovato."
     exit 1
 fi
 
 # Step 3: Controllo di qualità
-for ((i=0; i<PAIR_COUNT; i+=2)); do
-    fastqc -o "$QUALITY_DIR" "${FASTQ_FILES[i]}" "${FASTQ_FILES[i+1]}"
+for FILE in "${FASTQ_FILES[@]}"; do
+    fastqc -o "$QUALITY_DIR" "$FILE"
 done
 
 # Step 4: Allineamento e generazione BAM file con soft clipping
-for ((i=0; i<PAIR_COUNT; i+=2)); do
-    SAMPLE_NAME=$(basename "${FASTQ_FILES[i]}" | cut -d'_' -f1)
+for ((i=0; i<PAIR_COUNT; i++)); do
+    FASTQ_FILE="${FASTQ_FILES[i]}"
+    SAMPLE_NAME=$(basename "$FASTQ_FILE" | cut -d'_' -f1)
     BAM_FILE="$OUTPUT_DIR/${SAMPLE_NAME}.sorted.bam"
     NOORG_BAM_FILE="$OUTPUT_DIR/${SAMPLE_NAME}.sorted.noorg.bam"
 
-    # Bowtie2 Alignment con soft clipping e output in BAM
-    bowtie2 --local --threads "$THREADS" -x "$GENOME_INDEX_DIR/genome_index" \
-        -1 "${FASTQ_FILES[i]}" -2 "${FASTQ_FILES[i+1]}" | \
-    samtools view --threads "$THREADS" -bS - | \
-    samtools sort --threads "$THREADS" -o "$BAM_FILE"
-    
+    # Verifica se esiste un file paired-end
+    PAIR_FILE=$(echo "$FASTQ_FILE" | sed 's/_R1_/_R2_/')
+    if [ -f "$PAIR_FILE" ]; then
+        # Bowtie2 Alignment paired-end
+        bowtie2 --local --threads "$THREADS" -x "$GENOME_INDEX_DIR/genome_index" \
+            -1 "$FASTQ_FILE" -2 "$PAIR_FILE" | \
+        samtools view --threads "$THREADS" -bS - | \
+        samtools sort --threads "$THREADS" -o "$BAM_FILE"
+    else
+        # Bowtie2 Alignment single-end
+        bowtie2 --local --threads "$THREADS" -x "$GENOME_INDEX_DIR/genome_index" \
+            -U "$FASTQ_FILE" | \
+        samtools view --threads "$THREADS" -bS - | \
+        samtools sort --threads "$THREADS" -o "$BAM_FILE"
+    fi
+
     samtools index "$BAM_FILE"
 
     # Rimuovi letture mitocondriali e cloroplastidiche
@@ -65,21 +76,29 @@ for ((i=0; i<PAIR_COUNT; i+=2)); do
 done
 
 # Step 5: Chiamata dei picchi
-for ((i=0; i<PAIR_COUNT; i+=2)); do
-    SAMPLE_NAME=$(basename "${FASTQ_FILES[i]}" | cut -d'_' -f1)
+for ((i=0; i<PAIR_COUNT; i++)); do
+    FASTQ_FILE="${FASTQ_FILES[i]}"
+    SAMPLE_NAME=$(basename "$FASTQ_FILE" | cut -d'_' -f1)
     NOORG_BAM_FILE="$OUTPUT_DIR/${SAMPLE_NAME}.sorted.noorg.bam"
 
-    macs2 callpeak -t "$NOORG_BAM_FILE" -q 0.05 --broad -f BAMPE -n "$SAMPLE_NAME" -B --trackline --outdir "$PEAK_OUTPUT_DIR"
+    PAIR_FILE=$(echo "$FASTQ_FILE" | sed 's/_R1_/_R2_/')
+    if [ -f "$PAIR_FILE" ]; then
+        # Chiamata dei picchi paired-end
+        macs2 callpeak -t "$NOORG_BAM_FILE" -q 0.05 --broad -f BAMPE -n "$SAMPLE_NAME" -B --trackline --outdir "$PEAK_OUTPUT_DIR"
+    else
+        # Chiamata dei picchi single-end
+        macs2 callpeak -t "$NOORG_BAM_FILE" -q 0.05 --broad -f BAM -n "$SAMPLE_NAME" -B --trackline --outdir "$PEAK_OUTPUT_DIR"
+    fi
 done
 
 # Step 6: Conversione dei file bedgraph in bigwig (opzionale)
-for ((i=0; i<PAIR_COUNT; i+=2)); do
+for ((i=0; i<PAIR_COUNT; i++)); do
     SAMPLE_NAME=$(basename "${FASTQ_FILES[i]}" | cut -d'_' -f1)
     BEDGRAPH_FILE="$PEAK_OUTPUT_DIR/${SAMPLE_NAME}_treat_pileup.bdg"
     CLIPPED_BEDGRAPH_FILE="$PEAK_OUTPUT_DIR/${SAMPLE_NAME}_treat_pileup.clipped.sorted.bdg"
     BIGWIG_FILE="$PEAK_OUTPUT_DIR/${SAMPLE_NAME}_treat_pileup.clipped.sorted.bw"
     CHR_SIZES_FILE="$OUTPUT_DIR/At_chr.sizes"
-    
+
     bioawk -c fastx '{print $name, length($seq)}' "$GENOME_FASTA" > "$CHR_SIZES_FILE"
     bedtools slop -i "$BEDGRAPH_FILE" -g "$CHR_SIZES_FILE" -b 0 | bedClip stdin "$CHR_SIZES_FILE" "$CLIPPED_BEDGRAPH_FILE"
     sort -k1,1 -k2,2n "$CLIPPED_BEDGRAPH_FILE" > "$CLIPPED_BEDGRAPH_FILE.sorted"
