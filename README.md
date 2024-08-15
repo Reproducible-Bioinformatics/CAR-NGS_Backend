@@ -59,7 +59,8 @@ The Whole Genome Sequencing (WGS) pipeline processes data from WGS experiments, 
 Each directory contains a dedicated pipeline for a specific genomic analysis technique. To run a pipeline:
 
 1. **Navigate to the appropriate directory**:
-```bash cd Bulk_rnaseq
+```bash
+  cd Bulk_rnaseq
 ```
 
 2. **Read the specific `README.md`**: Each directory contains its own `README.md` file with detailed instructions on how to run the pipeline, including dependencies, input data formats, and output file descriptions.
@@ -67,7 +68,8 @@ Each directory contains a dedicated pipeline for a specific genomic analysis tec
 3. **Prepare your environment**: Ensure Docker is installed on your system. The pipelines are designed to run inside Docker containers, ensuring consistency and reproducibility across different computing environments.
 
 4. **Execute the pipeline**: Follow the instructions in the respective directory to run the analysis pipeline using Docker. Most pipelines can be started with a simple command, such as:
-```bash ./run_pipeline.sh
+```bash
+./run_pipeline.sh
 ```
 
 ## Prerequisites
