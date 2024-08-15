@@ -53,23 +53,29 @@ All these dependencies are pre-installed in the Docker image `repbioinfo/rnaseqs
 ## Installation and Setup
 
 1. **Clone the repository**:
-   ```bashgit clone https://github.com/yourusername/rnaseq_pipeline.git
+   ```bash
+   git clone https://github.com/yourusername/rnaseq_pipeline.git
    cd rnaseq_pipeline
 ```
 2. **Run the Index and Alignment Script**:
-   ```bash./index_align.sh
+   ```bash
+   ./index_align.sh
 ```
 3. **Run the PCA Script**:
-   ```bash./pca.sh
+   ```bash
+   ./pca.sh
 ```
 4. **Run the DESeq2 Script**:
-   ```bash./deseq2.sh
+   ```bash
+   ./deseq2.sh
 ```
 5. **Generate Heatmaps**:
-   ```bash./heatmap.sh
+   ```bash
+   ./heatmap.sh
 ```
 6. **Run the Complete Downstream Analysis**:
-   ```bash./cdsa.sh
+   ```bash
+   ./cdsa.sh
 ```
 ## Script Description
 
