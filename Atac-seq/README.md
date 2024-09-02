@@ -77,3 +77,6 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ## Contact
 
 For questions, feedback, or issues, please open an issue on this repository or contact the maintainer at [your.email@example.com](mailto:your.email@example.com).
+
+## Cite
+GSM6929262: Dmel_78-Pupa_bioRep-1; Drosophila melanogaster; ATAC-seq (SRR23061259)
