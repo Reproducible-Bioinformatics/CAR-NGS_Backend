@@ -1,4 +1,8 @@
-# Genomic Data Analysis Pipelines
+# **C**ross-platform **A**ccessible **R**eproducible-NGS data analysis (**CAR-NGS**)
+
+<img src="./Logo.png" alt="Logo" width="200"/>
+
+### "CAR-NGS: Buckle Up, We're Taking Your DNA for a Ride!"
 
 This repository contains a collection of automated data analysis pipelines for various genomic techniques. Each pipeline is designed to simplify the process of analyzing high-throughput sequencing data using Docker, ensuring reproducibility and ease of use.
 

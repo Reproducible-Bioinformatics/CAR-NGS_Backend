@@ -1,0 +1,2 @@
+FROM repbioinfo/carncellranger
+COPY backend_alignment/* /home/

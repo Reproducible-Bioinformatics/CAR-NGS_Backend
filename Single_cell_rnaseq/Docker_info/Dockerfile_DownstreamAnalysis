@@ -1,0 +1,45 @@
+# Usa una base di Ubuntu
+FROM ubuntu:20.04
+
+# Imposta variabili di ambiente per evitare problemi durante l'installazione
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Aggiungi il repository CRAN per una versione aggiornata di R
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/' && \
+    apt-get update
+
+# Installa i pacchetti necessari
+RUN apt-get update && \
+    apt-get install -y \
+    curl \
+    bzip2 \
+    build-essential \
+    zlib1g-dev \
+    wget \
+    python3 \
+    python3-pip \
+    git \
+    unzip \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    libssl-dev \
+    libhdf5-dev \
+    libfftw3-dev \
+    libgsl0-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libreadline-dev \
+    r-base \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installazione di librerie R per l'analisi dei dati e la visualizzazione
+RUN R -e "install.packages(c('ggplot2', 'pheatmap','dplyr','BiocManager'), repos='http://cran.rstudio.com/')"
+RUN R -e "BiocManager::install(c('Seurat', 'edgeR', 'AnnotationDbi', 'org.Hs.eg.db', 'org.Mm.eg.db', 'org.Dm.eg.db','future','MAST'))"
+RUN R -e "BiocManager::install(c('gprofiler2'))"
+RUN R -e "BiocManager::install(c('org.Hs.eg.db', 'org.Mm.eg.db', 'org.Dm.eg.db', 'org.Rn.eg.db', 'org.Sc.sgd.db','biomaRt'))"
+
+COPY backend_DownstreamAnalysis/* /home/
