@@ -35,7 +35,7 @@ This pipeline is designed to be run within a Docker container to ensure reproduc
 
 1. Clone this repository to your local machine:
     ```bash
-    git clone https://github.com/yourusername/16S-pipeline.git
+    git clone https://github.com/yReproducible-Bioinformatics/CAR-NGS_Backend
     cd 16S-pipeline
     ```
 
