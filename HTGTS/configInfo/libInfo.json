@@ -1,0 +1,37 @@
+{
+  "CELTICSseq": {
+    "Forward": {
+      "PrimerContSeq": "GCAATGTGCA",
+      "BaitTerritorySeq": "GCAATGTGCACATGTACCCTAAAACTTAAAGTATAATAAAGACGTCAGGGTTCGAAATCGATAAGCTTGGATCCAGACATGATAAGATACATTGATGAGTTTGGACAAACCACAACTAGAATGCAGTGAAAAAAA"
+    }
+  },
+  "HTGTS_human": {
+    "Forward": {
+      "PrimerContSeq": "CTCCGAGATA",
+      "BaitTerritorySeq": "CTCCGAGATAGCAGGGGACTGTCCAAAGGGGGTGAAAGG"
+    }
+  },
+    "LAM_HTGTS_human_5": {
+    "Forward": {
+      "PrimerContSeq": "TCCGA",
+      "BaitTerritorySeq": "TCCGAGATAGCAGGGGACTGTCCAAAGGGGGTGAAAGG"
+    }
+  },
+  "HTGTS_mouse": {
+    "Forward": {
+      "PrimerContSeq": "GCGATTCCTG",
+      "BaitTerritorySeq": "GCGATTCCTGGGCGTCTGCAGGGCTAAGTCCCTGCTCGAAGGAGGCGGGGACTCGGAGCAGCTGCTAGTCCGACGAGCGTCACTGATA"
+    }
+  },
+  "polyA": {
+    "Forward": {
+      "PrimerContSeq": "AAAAAAAAAAAAAAA",
+      "RC3PrimerContSeq": "ATAACCAGCCCGGGCCGTCG",
+      "PrimerSeq": "GCAATAAACAAGTTAACAACAA"
+    },
+    "Reverse": {
+      "PrimerContSeq": "CGACGGCCCGGGCTGGTTAT",
+      "RC3PrimerSeq": "TTGTTGTTAACTTGTTTATTGC"
+    }
+  }
+}
