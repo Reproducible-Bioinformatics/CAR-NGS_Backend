@@ -74,22 +74,6 @@ Specific commands are defined in `commands.json`, including:
 
 ---
 
-## Supporting Files
-
-### `config_types.json`
-Defines the different configuration types available. Contains information on primers, restriction sites, and genomic positions.
-
-### `commands.json`
-Specifies the commands executed in the pipeline for each configuration, including demultiplexing, alignment, and BED file generation.
-
-### `libInfo.json`
-Contains information on primer sequences and target regions for each configuration.
-
-### `sample_sheetTolibInfo.py`
-Processes an Excel file containing experimental data and generates `libseqInfo.txt` and `libseqInfo2.txt`.
-
----
-
 ## Full Example (`Example.sh`)
 
 The `Example.sh` script demonstrates how to use both scripts together.
