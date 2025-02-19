@@ -1,0 +1,58 @@
+{
+  "CELTICSseq": {
+    "investigator": "Investigator",
+    "orientation": "Red",
+    "restrictionSite": "GGCC",
+    "redPrimer": "GCTGGTTCACTAAGTGCGT",
+    "bluePrimer": "NULL",
+    "redContd": "CTCCGAGATAGCAGGGGACTGTCCAAAGGGGGTGAAAGG",
+    "blueContd": "GGCCG",
+    "breaksite": "CRISPR",
+    "chr": "chr8",
+    "start": "127738152",
+    "end": "127738156",
+    "ori": "+"
+  },
+  "HTGTS_human": {
+    "investigator": "Investigator",
+    "orientation": "Red",
+    "restrictionSite": "GGCC",
+    "redPrimer": "GCTGGTTCACTAAGTGCGT",
+    "bluePrimer": "NULL",
+    "redContd": "CTCCGAGATAGCAGGGGACTGTCCAAAGGGGGTGAAAGG",
+    "blueContd": "GGCCG",
+    "breaksite": "CRISPR",
+    "chr": "chr8",
+    "start": "127738152",
+    "end": "127738156",
+    "ori": "+"
+  },
+  "HTGTS_mouse": {
+    "investigator": "Investigator",
+    "orientation": "Red",
+    "restrictionSite": "GGCC",
+    "redPrimer": "CCTCTGAAGCCAAGGCCGATG",
+    "bluePrimer": "NULL",
+    "redContd": "NULL",
+    "blueContd": "GGCCG",
+    "breaksite": "CRISPR",
+    "chr": "chr15",
+    "start": "61818858",
+    "end": "61818862",
+    "ori": "+"
+  },
+  "polyA": {
+    "investigator": "Investigator",
+    "orientation": "Red",
+    "restrictionSite": "GGCC",
+    "redPrimer": "GCAATAAACAAGTTAACAACAA",
+    "bluePrimer": "NULL",
+    "redContd": "AAAAAAA",
+    "blueContd": "GGCCG",
+    "breaksite": "CRISPR",
+    "chr": "chr8",
+    "start": "127738152",
+    "end": "127738156",
+    "ori": "+"
+  }
+}
