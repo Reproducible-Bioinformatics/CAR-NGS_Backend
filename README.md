@@ -26,35 +26,19 @@ This pipeline processes bulk RNA-Seq data to analyze gene expression levels in a
 
 Detect-seq is a pipeline for detecting sequence variants from high-throughput sequencing data. The pipeline includes steps for read alignment, variant calling, and annotation.
 
-### 5. `Gro-seq`
-
-The GRO-seq (Global Run-On Sequencing) pipeline analyzes nascent RNA transcripts to provide insights into transcriptional activity. The pipeline includes steps for alignment, transcript assembly, and expression quantification.
-
-### 6. `HTGTS`
+### 5. `HTGTS`
 
 High-Throughput Genome-Wide Translocation Sequencing (HTGTS) is a technique used to map chromosomal translocations. This pipeline includes steps for alignment, translocation detection, and visualization.
 
-### 7. `SCI`
+### 6. `SCI`
 
 The SCI (Single Cell Indexing) pipeline processes single-cell sequencing data to analyze gene expression at the individual cell level. The pipeline includes steps for cell demultiplexing, alignment, gene quantification, and clustering analysis.
 
-### 8. `Single_cell_rnaseq`
+### 7. `Single_cell_rnaseq`
 
 This pipeline is tailored for single-cell RNA-Seq data, enabling the analysis of gene expression at the single-cell level. The pipeline includes steps for quality control, normalization, clustering, and differential expression analysis.
 
-### 9. `SpatialTranscriptomics`
-
-The Spatial Transcriptomics pipeline analyzes data from spatially resolved transcriptomics experiments, which retain the spatial context of gene expression. The pipeline includes steps for data alignment, spatial mapping, and visualization.
-
-### 10. `SRA_toolkit`
-
-The SRA Toolkit pipeline provides tools for accessing and processing sequencing data stored in the Sequence Read Archive (SRA). This includes tools for downloading, converting, and processing SRA files.
-
-### 11. `TCR_SingleCell_RNAseq`
-
-This pipeline is focused on T-cell receptor (TCR) sequencing data from single-cell RNA-Seq experiments, which helps in understanding TCR diversity and clonal expansion. The pipeline includes steps for TCR sequence identification, annotation, and analysis.
-
-### 12. `WholeGenomeSequencing`
+### 8. `WholeGenomeSequencing`
 
 The Whole Genome Sequencing (WGS) pipeline processes data from WGS experiments, enabling comprehensive analysis of genomic variants. The pipeline includes steps for alignment, variant calling, annotation, and visualization.
 
