@@ -1,0 +1,5 @@
+FastQC
+Bowtie2
+samtools
+MACS2
+bedtools
